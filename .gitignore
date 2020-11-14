@@ -1,0 +1,5 @@
+*.swp
+.bundle
+.envrc
+credentials/
+terraform/.terraform
