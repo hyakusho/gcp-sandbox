@@ -64,6 +64,7 @@ PLATFORMS
 
 DEPENDENCIES
   google-cloud-bigquery (~> 1.23.0)
+  googleauth (~> 0.14.0)
 
 BUNDLED WITH
    2.1.4
