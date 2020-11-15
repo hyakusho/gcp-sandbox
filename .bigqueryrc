@@ -1,9 +1,8 @@
-credential_file = credentials/bigquery-key.json
---apilog=stdout
---format=prettyjson
+#--apilog=stdout
+#--format=prettyjson
 --location=US
 
 [query]
 --use_legacy_sql=false
---max_rows=100
---maximum_bytes_billed=10000000
+#--max_rows=100
+#--maximum_bytes_billed=10000000

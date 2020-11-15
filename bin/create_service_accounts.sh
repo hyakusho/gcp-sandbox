@@ -17,7 +17,7 @@ create_service_account_bigquery() {
       --iam-account ${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com
     gcloud projects add-iam-policy-binding $PROJECT \
       --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
-      --role roles/bigquery.user
+      --role roles/bigquery.admin
   fi
 }
 
