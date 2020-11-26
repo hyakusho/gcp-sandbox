@@ -12,7 +12,8 @@ terraform {
     }
   }
   backend "gcs" {
-    bucket = "hyakusho-io/terraform/development"
+    bucket = "hyakusho-io-terraform"
+    prefix = "development"
   }
 }
 
