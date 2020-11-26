@@ -1,7 +1,7 @@
 variable credentials {}
 variable project {}
 variable region { default = "us-central1" }
-variable zone { default = "use-central1-c" }
+variable zone { default = "us-central1-c" }
 
 terraform {
   required_version = "= 0.13.5"
