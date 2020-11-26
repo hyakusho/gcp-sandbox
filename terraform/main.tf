@@ -32,10 +32,10 @@ resource "google_compute_instance" "default" {
 
   allow_stopping_for_update = true
   labels = {
-    Environment = "development"
-    Name = "free"
-    Region = var.region
-    Zone = var.zone
+    environment = "development"
+    name = "free"
+    region = var.region
+    zone = var.zone
   }
 
   boot_disk {
