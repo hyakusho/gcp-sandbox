@@ -11,6 +11,9 @@ terraform {
       version = "= 3.47.0"
     }
   }
+  backend "gcs" {
+    bucket = "hyakusho-io/terraform/development"
+  }
 }
 
 provider "google" {

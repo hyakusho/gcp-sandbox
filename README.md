@@ -23,4 +23,5 @@ tfenv install
 terraform init
 terraform plan
 terraform apply
+gsutil mb -l us-central1 -b on gs://hyakusho-io
 ```
