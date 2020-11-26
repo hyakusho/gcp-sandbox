@@ -11,9 +11,13 @@ terraform {
       version = "= 3.47.0"
     }
   }
-  backend "gcs" {
-    bucket = "hyakusho-io-terraform"
-    prefix = "development"
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "hyakusho-io"
+
+    workspaces {
+      name = "gcp-sandbox"
+    }
   }
 }
 

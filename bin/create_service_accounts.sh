@@ -42,16 +42,6 @@ create_service_account() {
       --role roles/$role >> $LOGFILE 2>&1
   done
   set +eo pipefail
-
-  # gcs settings
-  if [ $service_account = "terraform" ]; then
-    bucket="gs://hyakusho-io-terraform"
-    gsutil mb -l us-central1 -b on $bucket
-    gsutil versioning on $buckeet
-    gsutil iam ch \
-      serviceAccount:${service_account}@${PROJECT}.iam.gserviceaccount.com:roles/storage.objectAdmin \
-      $bucket
-  fi
 }
 
 main() {
