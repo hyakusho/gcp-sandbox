@@ -1,7 +1,8 @@
 # データセット
 ## データセットの作成
 ```console
-bq --location=US mk -d \
+bq --location=US mk \
+  -d \
   --default_table_expiration 3600 \
   --description "This is my dataset." \
   mydataset

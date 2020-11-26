@@ -1,0 +1,31 @@
+{
+  "access": [
+    {
+      "role": "WRITER",
+      "specialGroup": "projectWriters"
+    },
+    {
+      "role": "OWNER",
+      "specialGroup": "projectOwners"
+    },
+    {
+      "role": "WRITER",
+      "userByEmail": "bigquery@gcp-sandbox-296403.iam.gserviceaccount.com"
+    },
+    {
+      "role": "READER",
+      "specialGroup": "projectReaders"
+    }
+  ],
+  "creationTime": "1606022185139",
+  "datasetReference": {
+    "datasetId": "babynames",
+    "projectId": "gcp-sandbox-296403"
+  },
+  "etag": "kzeJdhvol2N/wZq4f5JwvQ==",
+  "id": "gcp-sandbox-296403:babynames",
+  "kind": "bigquery#dataset",
+  "lastModifiedTime": "1606022185139",
+  "location": "US",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/gcp-sandbox-296403/datasets/babynames"
+}

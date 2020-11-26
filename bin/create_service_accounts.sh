@@ -2,6 +2,11 @@
 
 BASEDIR=$(cd $(dirname $0)/.. && pwd && cd - >& /dev/null)
 PROJECT=$(gcloud config get-value core/project)
+LOGFILE=/tmp/$(basename ${0}).log
+
+output_logfile() {
+  cat $LOGFILE
+}
 
 exists_service_account() {
   SERVICE_ACCOUNT=$1
@@ -15,10 +20,15 @@ create_service_account_bigquery() {
     gcloud iam service-accounts create $SERVICE_ACCOUNT --display-name $SERVICE_ACCOUNT
     gcloud iam service-accounts keys create $BASEDIR/credentials/${SERVICE_ACCOUNT}-key.json \
       --iam-account ${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com
-    gcloud projects add-iam-policy-binding $PROJECT \
-      --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
-      --role roles/bigquery.admin
   fi
+
+  set -eo pipefail
+  gcloud projects add-iam-policy-binding $PROJECT \
+    --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
+    --role roles/bigquery.dataEditor > $LOGFILE
+  gcloud projects add-iam-policy-binding $PROJECT \
+    --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
+    --role roles/bigquery.jobUser > $LOGFILE
 }
 
 create_service_account_terraform() {
@@ -28,18 +38,18 @@ create_service_account_terraform() {
     gcloud iam service-accounts create $SERVICE_ACCOUNT --display-name $SERVICE_ACCOUNT
     gcloud iam service-accounts keys create $BASEDIR/credentials/${SERVICE_ACCOUNT}-key.json \
       --iam-account ${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com
-    gcloud projects add-iam-policy-binding $PROJECT \
-      --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
-      --role roles/compute.admin
-    gcloud projects add-iam-policy-binding $PROJECT \
-      --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
-      --role roles/iam.serviceAccountUser
   fi
+
+  set -eo pipefail
+  gcloud projects add-iam-policy-binding $PROJECT \
+    --member serviceAccount:${SERVICE_ACCOUNT}@${PROJECT}.iam.gserviceaccount.com \
+    --role roles/compute.admin > $LOGFILE
 }
 
 main() {
   create_service_account_terraform
   create_service_account_bigquery
+  output_logfile
 }
 
 main

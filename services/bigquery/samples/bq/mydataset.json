@@ -1,0 +1,35 @@
+{
+  "access": [
+    {
+      "role": "WRITER",
+      "specialGroup": "projectWriters"
+    },
+    {
+      "role": "OWNER",
+      "specialGroup": "projectOwners"
+    },
+    {
+      "role": "OWNER",
+      "userByEmail": "hyakushoio@gmail.com"
+    },
+    {
+      "role": "READER",
+      "specialGroup": "projectReaders"
+    },
+    {
+      "role": "roles/bigquery.jobUser",
+      "userByEmail": "bigquery@gcp-sandbox-296403.iam.gserviceaccount.com"
+    }
+  ],
+  "creationTime": "1606015247441",
+  "datasetReference": {
+    "datasetId": "mydataset",
+    "projectId": "gcp-sandbox-296403"
+  },
+  "etag": "Qq8hRugtDM81Evx08kownw==",
+  "id": "gcp-sandbox-296403:mydataset",
+  "kind": "bigquery#dataset",
+  "lastModifiedTime": "1606016553651",
+  "location": "US",
+  "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/gcp-sandbox-296403/datasets/mydataset"
+}

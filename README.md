@@ -4,7 +4,7 @@
 ### プロジェクトの作成
 ```
 gcloud auth login
-gcloud config configurations create sandbox
+gcloud config configurations create gcp-sandbox
 gcloud config set account <account>
 gcloud config set project <project-id>
 gcloud config set compute/region <region>
