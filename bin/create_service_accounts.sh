@@ -11,7 +11,7 @@ create_service_account() {
   roles=()
   case $service_account in
     terraform)
-      roles=(compute.admin)
+      roles=(compute.admin storage.admin)
       ;;
     bigquery)
       roles=(bigquery.dataEditor bigquery.jobUser)
@@ -42,6 +42,16 @@ create_service_account() {
       --role roles/$role >> $LOGFILE 2>&1
   done
   set +eo pipefail
+
+#  # bucket level policy
+#  case $service_account in
+#    bigquery)
+#      bucket=bigquery
+#      gsutil iam ch serviceAccount:${service_account}@${PROJECT}.iam.gserviceaccount.com:roles/storage.objectAdmin $bucket
+#      ;;
+#    *)
+#      ;;
+#  esac
 }
 
 main() {

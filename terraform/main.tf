@@ -60,3 +60,28 @@ resource "google_compute_instance" "default" {
     access_config {}
   }
 }
+
+resource "google_storage_bucket" "bigquery" {
+  name = "bigquery"
+  location = var.region
+  force_destroy = true
+  uniform_bucket_level_access = true
+
+  versioning {
+    enabled = true
+  }
+}
+
+data "google_iam_policy" "storage_admin" {
+  binding {
+    role = "roles/storage.objectAdmin"
+    members = [
+      "serviceAccount:bigquery@${var.project}.iam.gserviceaccount.com"
+    ]
+  }
+}
+
+resource "google_storage_bucket_iam_policy" "bigquery" {
+  bucket = google_storage_bucket.bigquery.name
+  policy_data = data.google_iam_policy.storage_admin.policy_data
+}
