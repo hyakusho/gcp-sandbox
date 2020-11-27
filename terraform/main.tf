@@ -72,16 +72,10 @@ resource "google_storage_bucket" "bigquery" {
   }
 }
 
-data "google_iam_policy" "storage_admin" {
-  binding {
-    role = "roles/storage.objectAdmin"
-    members = [
-      "serviceAccount:bigquery@${var.project}.iam.gserviceaccount.com"
-    ]
-  }
-}
-
-resource "google_storage_bucket_iam_policy" "bigquery" {
+resource "google_storage_bucket_iam_binding" "bigquery" {
   bucket = google_storage_bucket.bigquery.name
-  policy_data = data.google_iam_policy.storage_admin.policy_data
+  role = "roles/storage.objectAdmin"
+  members = [
+    "serviceAccount:bigquery@${var.project}.iam.gserviceaccount.com"
+  ]
 }
