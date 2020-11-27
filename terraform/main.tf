@@ -62,7 +62,7 @@ resource "google_compute_instance" "default" {
 }
 
 resource "google_storage_bucket" "bigquery" {
-  name = "hyakkusho-io-bigquery"
+  name = "hyakusho-io-bigquery"
   location = var.region
   force_destroy = true
   uniform_bucket_level_access = true
