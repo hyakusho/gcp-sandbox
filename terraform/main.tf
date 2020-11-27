@@ -33,7 +33,7 @@ data "google_compute_image" "ubuntu_2004" {
   project = "ubuntu-os-cloud"
 }
 
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "free" {
   name = "free"
   machine_type = "f1-micro"
   zone = var.zone
@@ -58,6 +58,39 @@ resource "google_compute_instance" "default" {
     network = "default"
 
     access_config {}
+  }
+}
+
+resource "google_compute_instance" "datadog" {
+  name = "datadog"
+  machine_type = "e2-small"
+  zone = var.zone
+
+  allow_stopping_for_update = true
+  labels = {
+    environment = "development"
+    name = "datadog"
+    region = var.region
+    zone = var.zone
+  }
+
+  boot_disk {
+    initialize_params {
+      size = 30
+      type = "pd-standard"
+      image = data.google_compute_image.ubuntu_2004.self_link
+    }
+  }
+
+  network_interface {
+    network = "default"
+
+    access_config {}
+  }
+
+  scheduling {
+    preemptible = true
+    automatic_restart = false
   }
 }
 
