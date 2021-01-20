@@ -11,13 +11,25 @@ create_service_account() {
   roles=()
   case $service_account in
     terraform)
-      roles=(compute.admin storage.admin)
+      roles=(
+        roles/compute.admin
+        roles/storage.admin
+        roles/serviceusage.serviceUsageViewer
+        projects/$PROJECT/roles/servicemanagement.serviceConsumer
+      )
       ;;
     bigquery)
-      roles=(bigquery.dataEditor bigquery.jobUser)
+      roles=(
+        roles/bigquery.dataEditor
+        roles/bigquery.jobUser
+      )
       ;;
     ansible)
-      roles=(compute.osAdminLogin compute.instanceAdmin compute.instanceAdmin.v1)
+      roles=(
+        roles/compute.osAdminLogin
+        roles/compute.instanceAdmin
+        roles/compute.instanceAdmin.v1
+      )
       ;;
     *)
       echo "NotSupportedServiceAccountException : $service_account"
@@ -39,7 +51,7 @@ create_service_account() {
     echo "- $role"
     gcloud projects add-iam-policy-binding $PROJECT \
       --member serviceAccount:${service_account}@${PROJECT}.iam.gserviceaccount.com \
-      --role roles/$role >> $LOGFILE 2>&1
+      --role $role >> $LOGFILE
   done
   set +eo pipefail
 
